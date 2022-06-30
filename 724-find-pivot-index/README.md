@@ -43,5 +43,5 @@ Right sum = nums[1] + nums[2] = 1 + -1 = 0
 </ul>
 
 <p>&nbsp;</p>
-<p><strong>Note:</strong> This question is the same as&nbsp;1991:&nbsp;<a href="https://leetcode.com/problems/find-the-middle-index-in-array/" target="_blank" style="outline-width: 0px !important; user-select: auto !important;">https://leetcode.com/problems/find-the-middle-index-in-array/</a></p>
+<p><strong>Note:</strong> This question is the same as&nbsp;1991:&nbsp;<a href="https://leetcode.com/problems/find-the-middle-index-in-array/" target="_blank" style="">https://leetcode.com/problems/find-the-middle-index-in-array/</a></p>
 </div>
