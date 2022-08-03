@@ -76,7 +76,8 @@ class Solution {
         
         int[] ans = new int[k];
         int i = 0;
-        for(int count = n; count >= 0; count--) {
+        // bcoz 1 can be the min freq for an element
+        for(int count = n; count >= 1; count--) {
             var v = buckets.get(count);
             // works because number of elements satisfying K cannot be ambiguous
             // meaning only k uniq element will be there satisfying the criteria
