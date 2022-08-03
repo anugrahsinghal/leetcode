@@ -32,29 +32,61 @@ class Solution {
         // map count to int[]
         // how many numbers have that particular count
         
-        Map<Integer/*Count*/, List<Integer>> countToElements = 
-            new TreeMap<>((i1,i2) -> i2-i1);// tree map keys are sorted right ?
+//         Map<Integer/*Count*/, List<Integer>> countToElements = 
+//             new TreeMap<>((i1,i2) -> i2-i1);// tree map keys are sorted right ?
         
         
-        map.forEach((key,v) -> {
-            List<Integer> list = countToElements.getOrDefault(v, new ArrayList<Integer>());
-            list.add(key);
-            countToElements.put(v, list);
+//         map.forEach((key,v) -> {
+//             List<Integer> list = countToElements.getOrDefault(v, new ArrayList<Integer>());
+//             list.add(key);
+//             countToElements.put(v, list);
+//         });
+        
+//         int[] ans = new int[k];
+//         int i = 0;
+//         for(int count : countToElements.keySet()) {
+//             var v = countToElements.get(count);
+//             // works because number of elements satisfying K cannot be ambiguous
+//             // meaning only k uniq element will be there satisfying the criteria
+//             for(var item : v) {
+//                 ans[i++] = item;
+//             }
+//             if( i == k) break;
+//         }
+
+//         return ans;      
+        
+        
+        // try 3
+        // map is not needed
+        // result is bound by size of input
+        // so we can have a List<List<int>> the number of list<int> = n
+        
+        List<List<Integer>> buckets = new ArrayList<>();
+        for(int i = 0; i < n+1; i++) {
+            buckets.add(new ArrayList<>());
+        }
+        
+        map.forEach((key,freq) -> {
+            // get bucket for count v
+            // add element key to that bucket
+            var bucket = buckets.get(freq);
+            bucket.add(key);
         });
         
         int[] ans = new int[k];
         int i = 0;
-        for(int count : countToElements.keySet()) {
-            var v = countToElements.get(count);
+        for(int count = n; count >= 0; count--) {
+            var v = buckets.get(count);
             // works because number of elements satisfying K cannot be ambiguous
             // meaning only k uniq element will be there satisfying the criteria
             for(var item : v) {
                 ans[i++] = item;
             }
-            if( i == k) break;
+            if(i == k) break;
         }
 
-        return ans;        
+        return ans; 
     }
     
 static class Pair<K,V> {
