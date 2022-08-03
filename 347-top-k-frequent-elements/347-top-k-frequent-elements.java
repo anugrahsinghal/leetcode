@@ -83,7 +83,7 @@ class Solution {
             for(var item : v) {
                 ans[i++] = item;
             }
-            if(i == k) break;
+            if(i == k) return ans;
         }
 
         return ans; 
