@@ -46,6 +46,8 @@ class Solution {
         int i = 0;
         for(int count : countToElements.keySet()) {
             var v = countToElements.get(count);
+            // works because number of elements satisfying K cannot be ambiguous
+            // meaning only k uniq element will be there satisfying the criteria
             for(var item : v) {
                 ans[i++] = item;
             }
