@@ -5,9 +5,13 @@ class Solution {
         
         for(var origStr : strs) {
             final char[] arr = origStr.toCharArray();
-            Arrays.sort(arr);
+            final char[] count = new char[26];
             
-            final var str = new String(arr);
+            for(char c : arr) {
+                count[c - 'a']++;
+            }
+            
+            final var str = new String(count);
             
             map.putIfAbsent(str, new ArrayList<>());
 
