@@ -1,11 +1,13 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String, List<String>> map = new HashMap<>();
+    public List<List<String>> groupAnagrams(final String[] strs) {
+        
+        final Map<String, List<String>> map = new HashMap<>();
+        
         for(var origStr : strs) {
-            char[] arr = origStr.toCharArray();
+            final char[] arr = origStr.toCharArray();
             Arrays.sort(arr);
             
-            var str = new String(arr);
+            final var str = new String(arr);
             
             map.putIfAbsent(str, new ArrayList<>());
 
