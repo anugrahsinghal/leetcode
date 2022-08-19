@@ -8,6 +8,14 @@ public class Solution extends VersionControl {
         int end = n;
         
         int lastBad = -1;
+        /*
+        - since looking for lower bound 
+        - each time you find a result
+            - store it
+            - check for more result in with lesser upper bound **thus** `end = mid - 1`
+        - else
+          - increment the lower bound `start = mid+1`
+        */
         while(start <= end) {
             int mid = start + end >>> 1;
             
