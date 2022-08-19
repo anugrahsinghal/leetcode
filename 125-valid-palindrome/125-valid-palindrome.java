@@ -8,18 +8,18 @@ class Solution {
         
         int i = 0;
         int j = s.length() - 1;
+        char[] arr = s.toCharArray();
         while(i <= j) {
-            char a = s.charAt(i);
+            char a = arr[i];//s.charAt(i);
             if(isInvalidChar.test(a)) {
                 i++;
                 continue;
             }
-            char b = s.charAt(j);
+            char b = arr[j];//s.charAt(j);
             if(isInvalidChar.test(b)) {
                 j--;
                 continue;
             }
-            // System.out.println(a +" == " + b + " ? -> " + (a == b) );
             
             if(a != b) {
                 return false;
