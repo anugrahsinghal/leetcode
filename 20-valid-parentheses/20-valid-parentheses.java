@@ -3,6 +3,9 @@ class Solution {
         Deque<Character> stack = new ArrayDeque<>();
         
         int n = s.length();
+
+        if(n%2 != 0) return false;
+        
         for(int i = 0; i < n; i++) {
             char c = s.charAt(i);
             if(c == '(' || c == '[' || c == '{' ) {
