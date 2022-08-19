@@ -19,7 +19,7 @@ class Solution {
                 j--;
                 continue;
             }
-            System.out.println(a +" == " + b + " ? -> " + (a == b) );
+            // System.out.println(a +" == " + b + " ? -> " + (a == b) );
             
             if(a != b) {
                 return false;
