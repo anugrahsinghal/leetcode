@@ -6,34 +6,17 @@ class Solution {
         var n = ransomNote.length();
         for(int i = 0; i < n; i++) {
             char c = ransomNote.charAt(i);
-            map.put(c, map.getOrDefault(c, 0) - 1);
-            if(map.get(c) < 0) {
-                return false;
-            }
+            var freq = map.get(c);
+            if(freq == null || freq <= 0) return false;
+            map.put(c, freq - 1);
         }
         
         return true;
-        
-        
-        
-//         var note = freqMap(ransomNote);
-//         if(note.size() > mag.size()) return false;
-        
-//         for(Character letter : note.keySet()) {
-//             int freq = note.get(letter);
-            
-//             Integer magFreq = mag.get(letter);
-//             if(magFreq == null || magFreq < freq) {
-//                 return false;
-//             }
-//         }
-        
-//         return true;
     }
     
     Map<Character, Integer> freqMap(String s) {
         var n = s.length();
-        var map = new HashMap<Character, Integer>();
+        var map = new HashMap<Character, Integer>(26);
         for(int i = 0; i < n; i++) {
             char c = s.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
