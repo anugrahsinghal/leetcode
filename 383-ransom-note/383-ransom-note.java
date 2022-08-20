@@ -16,7 +16,7 @@ class Solution {
     
     Map<Character, Integer> freqMap(String s) {
         var n = s.length();
-        var map = new HashMap<Character, Integer>(26);
+        var map = new HashMap<Character, Integer>(30);
         for(int i = 0; i < n; i++) {
             char c = s.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
