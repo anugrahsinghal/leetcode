@@ -6,7 +6,7 @@ class Solution {
     }
 
     void partition(String s, int startIndex, List<String> ds, List<List<String>> ans) {
-        if(startIndex == s.length()) {
+        if(0 == s.length()) {
             ans.add(new ArrayList<>(ds));
             return;
         }
@@ -16,7 +16,7 @@ class Solution {
             var prefix = s.substring(startIndex, i+1);
             if(isPalindrome(prefix)) {
                 ds.add(prefix);
-                partition(s, i+1, ds, ans);
+                partition(s.substring(i+1), 0, ds, ans);
                 ds.remove(ds.size() - 1);
             }
         }
