@@ -15,7 +15,7 @@
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        print(p, q);
+        // print(p, q);
         if(p == null && q != null) return false;
         if(p != null && q == null) return false;
         if(p == null && q == null) return true;
