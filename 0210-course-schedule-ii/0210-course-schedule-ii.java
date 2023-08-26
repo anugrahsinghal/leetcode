@@ -1,60 +1,47 @@
 class Solution {
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        List<Integer> ans = new ArrayList<>();
-        if(!canFinish(numCourses, prerequisites, ans)) return new int[]{};
-        var nums = new int[numCourses];
-        int k=0;
-        for(int i:ans) {
-            nums[k++] = i;
-        }
-
-        return nums;
-    }
-
-    public boolean canFinish(int numCourses, int[][] prerequisites, List<Integer> ans) {
-        if(numCourses == 1) return true;
-        int n = numCourses;
-        
+    public int[] findOrder(int n, int[][] prerequisites) {
         Map<Integer, List<Integer>> g = new HashMap<>();
         for(int i = 0; i < n; i++) { 
             g.put(i, new ArrayList<>());
         }
         for(int[] edge : prerequisites) {
-            g.get(edge[0]).add(edge[1]);
+            g.get(edge[0]).add(edge[1]);// add nbrs
         }
 
-        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        int[] visited = new int[n];
         for(int i = 0; i < n; i++) { 
-            if(dfs(g, visited, i, ans) == false) return false;
+            if(visited[i] == 0) {
+                if(toposort(g, i, visited, stack) == false) { // check if topological sort is possible
+                    return new int[]{}; // not possible
+                }
+            }
         }
 
-        return true;
+        int[] ans = new int[n];
+        int k = n-1;
+
+        while(stack.size() > 0) {
+            ans[k--] = stack.pop();
+        }
+        
+        return ans;
     }
 
-    boolean dfs(Map<Integer, List<Integer>> g, Set<Integer> visited, int course, List<Integer> ans) {
-        if(visited.contains(course)) return false; // already visited node - loop found
-        if(g.get(course).isEmpty()) {
-            if(!ans.contains(course))
-                ans.add(course);// duplicate
-            return true; // no pre-requisites
+    boolean toposort(Map<Integer, List<Integer>> g, int node, int[] visited, Stack<Integer> stack) {
+        visited[node] = 1;
+        for(int nbr : g.get(node)) {
+            if(visited[nbr] == 0) { // not visited
+                if(toposort(g, nbr, visited, stack) == false) {
+                    return false;
+                }
+            } else if(visited[nbr] == 1) { // if is in visting state - that is we found cycle
+                return false; // cycle detected, topological sort not possible
+            }
         }
-
-        visited.add(course);
-        // if we add empty course here
-        // then it become a loop
-        // for eg. if 2 course depend one course
-        // so visited is not exactly to keep track of visited
-        // but to find if we get in a loop
-        // my commentary - thus it can be visitCount also -- maybe
-
-        for(int preRequisite : g.get(course)) {
-            if(dfs(g, visited, preRequisite, ans) == false) return false;
-        }
-        ans.add(course);
-        visited.remove(course);
-        g.get(course).clear();
-
+        visited[node] = 2;// fully visited
+        stack.add(node);
         return true;
     }
-
+    
 }
