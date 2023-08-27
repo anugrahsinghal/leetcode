@@ -1,5 +1,5 @@
 class Solution {
-    // something like shortest path finding
+    // something like shortest path finding - USE BFS for shortest path type problems
     public int ladderLength(String beginWord, String endWord, List<String> w) {
         Set<String> wordList = new HashSet<>(w);
         
@@ -11,23 +11,7 @@ class Solution {
                 }
                 charsForPosition.get(i).add(word.charAt(i));
             }
-        }
-        // System.out.println(charsForPosition);
-        // int[] cost = new int[]{Integer.MAX_VALUE};
-        // Set<String> visited = new HashSet<>();
-        // Collections.sort(wordList);
-        // wordList.add(beginWord);
-        // doDFS(
-        //     beginWord.toCharArray(),
-        //     endWord,
-        //     charsForPosition,
-        //     0,
-        //     cost,
-        //     new HashSet<>(wordList),
-        //     0,
-        //     visited
-        // );
-        
+        }        
         
         int cost = Integer.MAX_VALUE;
         Queue<Pair<String, Integer>> q = new ArrayDeque<>();
@@ -42,29 +26,25 @@ class Solution {
             var level = pair.value;
 
             if(word.equals(endWord)) {
-                // System.out.printf("%s -- cost = %d - level - %d", word, cost, level);
                 cost = Math.min(cost, level);
             }
 
             char[] currentWord = word.toCharArray();
-            // System.out.println("Processing WORD -- " + word + "-- level -- " + level);
-            for(int replaceIndex = 0; replaceIndex < currentWord.length; replaceIndex++) { 
-                char originalChar = currentWord[replaceIndex];
-                for(char replacement : charsForPosition.get(replaceIndex)) {
-                    currentWord[replaceIndex] = replacement;
+            for(int position = 0; position < currentWord.length; position++) { 
+                char originalChar = currentWord[position];
+                for(char replacement : charsForPosition.get(position)) {
+                    currentWord[position] = replacement;
                     var newWord = new String(currentWord);
                     if(wordList.contains(newWord)) {
-                        // System.out.println("---- ADD WORD -- " + newWord + "-- level -- " + (level+1));
                         q.add(new Pair<>(newWord, level+1));
-                        wordList.remove(newWord);
+                        wordList.remove(newWord); 
+                        // important to mark visited in loop itself 
+                        // else BFS edge cases you will have to debug
                     } 
                 }
-                currentWord[replaceIndex] = originalChar;
+                currentWord[position] = originalChar;
             }
-            // System.out.println("END Processing WORD -- " + word + "-- level -- " + level);
         }
-
-        // System.out.println(wordList);
         
         return cost == Integer.MAX_VALUE ? 0 : cost;
     }
@@ -91,7 +71,7 @@ static class Pair<K,V> {
     }
 }
 
-
+    // IDK WHY THIS DID NOT WORK :(
     boolean doDFS(
         char[] currentWord, String target, 
         Map<Integer, Set<Character>> charsForPosition,
