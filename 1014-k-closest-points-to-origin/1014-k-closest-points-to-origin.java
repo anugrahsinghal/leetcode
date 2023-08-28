@@ -26,16 +26,10 @@ class Solution {
         return ans;
     }
 
+    // no need to take square or square root
+    // that is the trick to this question
     int distanceFromOrigin(Pair<Integer, Integer> p2){
-        return 
-        (int) 
-        // Math.pow(
-            (Math.pow((0 - p2.key),2)
-            +
-            Math.pow((0 - p2.value),2))
-            // , 2
-        // )
-        ;
+        return (int) (Math.pow((0 - p2.key),2) + Math.pow((0 - p2.value),2));
     }
 
 static class Pair<K,V> {
