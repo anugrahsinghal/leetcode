@@ -8,9 +8,9 @@ class Solution {
             }
         );
         for(int i = 0; i < points.length; i++) { 
-            var point = new Pair<Integer, Integer>(points[i][0], points[i][1]);
+            // var point = new Pair<Integer, Integer>(points[i][0], points[i][1]);
 
-            pq.add(new Pair<>(distanceFromOrigin(point), i));
+            pq.add(new Pair<>(distanceFromOrigin(points[i]), i));
             if(pq.size() > k) {
                 pq.poll();
             }
@@ -29,8 +29,8 @@ class Solution {
 
     // no need to take square or square root
     // that is the trick to this question
-    int distanceFromOrigin(Pair<Integer, Integer> p2){
-        return (int) (Math.pow((0 - p2.key),2) + Math.pow((0 - p2.value),2));
+    int distanceFromOrigin(int[] p){
+        return (int) (Math.pow((0 - p[0]), 2) + Math.pow((0 - p[1]), 2));
     }
 
 static class Pair<K,V> {
