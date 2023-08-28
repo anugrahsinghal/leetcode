@@ -4,12 +4,13 @@ class Solution {
         // closest -> smallest -> maxHeap
         var pq = new PriorityQueue<Pair<Integer, Integer>>(
             (p1, p2) -> {
-                return distanceFromOrigin(p2) - distanceFromOrigin(p1);
+                return p2.key - p1.key;
             }
         );
         for(int i = 0; i < points.length; i++) { 
             var point = new Pair<Integer, Integer>(points[i][0], points[i][1]);
-            pq.add(point);
+
+            pq.add(new Pair<>(distanceFromOrigin(point), i));
             if(pq.size() > k) {
                 pq.poll();
             }
@@ -20,7 +21,7 @@ class Solution {
         int c = 0;
         while(!pq.isEmpty()) {
             var p = pq.poll();
-            ans[c++] = new int[]{p.key, p.value};
+            ans[c++] = points[p.value]; // p.value index of original array
         }
 
         return ans;
