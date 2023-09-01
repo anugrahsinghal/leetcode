@@ -16,15 +16,13 @@ class Solution {
             leftP[i] = leftP[i-1] * nums[i-1];
         }
 
-        for(int i = n-2; i >= 0; i--) {
-            rightP[i] = rightP[i+1] * nums[i+1];
-        }
-
-        int[] ans = new int[n];
-        for(int i = 0; i < n; i++) { 
-            ans[i] = leftP[i] * rightP[i];
+        int R = 1;
+        // now for optimization
+        for(int i = n-1; i >= 0; i--) {
+            leftP[i] = R * leftP[i];
+            R = R * nums[i];
         }
         
-        return ans;
+        return leftP;
     }
 }
