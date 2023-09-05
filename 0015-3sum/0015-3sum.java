@@ -7,7 +7,7 @@ class Solution {
         // i = 0 i < 3-2=1;i++
         // j = 1
         int i = 0;
-        System.out.println(Arrays.toString(nums));
+        // System.out.println(Arrays.toString(nums));
         while(i < n-2) {
             // duplicate remove
             // insetad of checking forward I am checking that if prev element was same
