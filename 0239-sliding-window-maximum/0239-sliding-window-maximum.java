@@ -2,7 +2,7 @@ class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int N = nums.length;
         List <Integer> ans = max_of_subarrays(nums, N, k);
-        System.out.println(ans);
+        // System.out.println(ans);
         int[] arr = new int[N-k+1];
         for(int i = 0; i < N-k+1; i++) { 
           arr[i] = ans.get(i);
