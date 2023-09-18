@@ -20,8 +20,6 @@ class Solution {
         // if valid string found
         if(uniqCount == 0) {// increment I till we make smallest substring
           while(uniqCount == 0 && i <= j) {
-            // System.out.println(map);
-            // System.out.println(s.substring(i, j+1));
             if(j-i+1 < min) {
               min = j - i + 1;
               ans = s.substring(i, j+1);
@@ -29,7 +27,7 @@ class Solution {
             char start = s.charAt(i);
             if(map.containsKey(start)) {
               map.put(start, map.get(start) + 1);
-              if(map.get(start) > 0) {
+              if(map.get(start) == 1) {
                 uniqCount++;
               }
             }
