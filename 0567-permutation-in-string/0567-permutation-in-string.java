@@ -1,5 +1,18 @@
 class Solution {
 
+    // 012
+    // ab
+    // 01234567
+    // eidboaoo
+    //  ij   
+    // ws = 3
+    // 8-3 = 5
+    // matches = 22
+    
+    // 2 maps of 26 chars
+    // 1 matches variable
+    // when matches == 26 then we have a valid window
+    // go by size of s1
     public boolean checkInclusion(String s1, String s2) {
         if(s1.length() > s2.length()) return false;
         
@@ -14,28 +27,19 @@ class Solution {
             }
         }
         
-        //
-        // 012
-        // ab
-        // 01234567
-        // eidboaoo
-        //  ij   
-        // ws = 3
-        // 8-3 = 5
-        // matches = 22
+
         int i = 0;
         int j = s1.length();
         while(j < s2.length()) {
-            if(matches == 26) {
-                return true;
-            }
+            if(matches == 26) return true;
             
             int index = s2.charAt(j) - 'a';
             ms2[index]++;
             if(ms1[index] == ms2[index]) {
                 matches++;
             } else if (ms1[index] == ms2[index] - 1) {
-                // if due to ms2[]
+                // if ms1 and ms2 became unequal due to prev ms2[index]++;
+                // then we reduce number of matches
                 matches--;
             }
             
@@ -44,19 +48,16 @@ class Solution {
             if(ms1[index] == ms2[index]) {
                 matches++;
             } else if (ms1[index] == ms2[index] + 1) {
+                // if ms1 and ms2 became unequal due to prev ms2[index]++;
+                // then we reduce number of matches
                 matches--;
             }
             
             j++;
             i++;
-            // System.out.println(Arrays.toString(ms2));
         }
 
         return matches == 26;
-        // 2 maps of 26 chars
-        // 1 matches variable
-        // when matches == 26 then we have a valid window
-        // go by size of s1
     }
     int[] freq(String s1) {
         var freq = new int[26];
