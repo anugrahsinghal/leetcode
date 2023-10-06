@@ -13,9 +13,6 @@ class Solution {
                 matches++;
             }
         }
-        // System.out.println(matches);
-        // System.out.println(Arrays.toString(ms1));
-        // System.out.println(Arrays.toString(ms2));
         
         //
         // 012
@@ -37,7 +34,8 @@ class Solution {
             ms2[index]++;
             if(ms1[index] == ms2[index]) {
                 matches++;
-            } else if (ms1[index] + 1 == ms2[index]) {
+            } else if (ms1[index] == ms2[index] - 1) {
+                // if due to ms2[]
                 matches--;
             }
             
@@ -45,7 +43,7 @@ class Solution {
             ms2[index]--;
             if(ms1[index] == ms2[index]) {
                 matches++;
-            } else if (ms1[index] - 1 == ms2[index]) {
+            } else if (ms1[index] == ms2[index] + 1) {
                 matches--;
             }
             
