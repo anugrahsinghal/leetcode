@@ -4,6 +4,14 @@ class Solution {
         // then identify which part to search
         // then do binary search again
         int minValIdx = findMinValIndex(nums);
+        if(target >= nums[minValIdx] && target <= nums[nums.length - 1]) {
+            // search here min to end
+            return binarySearch(nums, minValIdx, nums.length - 1, target);
+        } else {
+            // search here 0 to min - 1
+            return binarySearch(nums, 0, minValIdx - 1, target);
+        }
+        /*
         if(minValIdx == 0) {// non rotated
             return binarySearch(nums, 0, nums.length - 1, target);
         } else {
@@ -21,13 +29,13 @@ class Solution {
                 // search here 0 to min - 1
                 return binarySearch(nums, 0, minValIdx - 1, target);
             }
-        }
+        }*/
 
         // return -1;
     }
 
     int binarySearch(int[] nums, int l, int r, int target) {
-        System.out.printf("nums %s, l = %d, r = %d, target = %d", Arrays.toString(nums),l,r,target);
+        // System.out.printf("nums %s, l = %d, r = %d, target = %d", Arrays.toString(nums),l,r,target);
         while(l <= r) {
             var mid = (l+r) >>> 1;
             if(nums[mid] == target) {
