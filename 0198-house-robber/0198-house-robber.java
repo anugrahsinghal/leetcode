@@ -1,12 +1,22 @@
 class Solution {
-    public int rob(int[] nums) {
-        int n = nums.length;
+    public int rob(int[] arr) {
+        int n = arr.length;
         int[] dp = new int[n+1];
-        Arrays.fill(dp, -1);
-        return helper(nums, n-1, dp);
+        dp[0] = arr[0];
+        for(int idx = 1; idx <= n-1; idx++) { 
+            int pick = arr[idx] + (idx-2 >= 0 ? dp[idx-2] : 0);
+            int notPick = 0 + dp[idx-1];
+
+            dp[idx] = Math.max(pick, notPick);
+        }
+
+        return dp[n-1];
     }
 
-    static int helper(int[] arr, int idx, int[] dp) {
+		// idx on first pass is n-1
+		// that means we want to consider full array from 0-idx
+		// and thus at idx we get the value
+    int helper(int[] arr, int idx, int[] dp) {
 			if(idx < 0) return 0;
 			if(idx == 0) return arr[0];	
 			if(dp[idx] != -1) return dp[idx];
