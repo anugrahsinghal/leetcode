@@ -7,20 +7,19 @@ class Solution {
             Arrays.fill(dp[i], -1);
         }
 
-        var min = Integer.MAX_VALUE;
-        for(int i = 0; i < n; i++) { 
-            min = Math.min(min, helper(m-1, i, dp, triangle));
-        }
-        return min;
+        // var min = Integer.MAX_VALUE;
+        // for(int i = 0; i < n; i++) { 
+        //     min = Math.min(min, helper(m-1, i, dp, triangle));
+        // }
+        return helper(0, 0, dp, triangle);
     }
     int helper(int r, int c, int[][] dp, List<List<Integer>> mat) {
-        if(r < 0 || c < 0) return Integer.MAX_VALUE;
-        if(c >= mat.get(r).size()) return Integer.MAX_VALUE;
-        if(r == 0 && c == 0) return mat.get(0).get(0);
+        if(r >= mat.size() || c >= mat.get(r).size()) return Integer.MAX_VALUE;
+        if(r == mat.size()-1 && c < mat.get(r).size()) return mat.get(r).get(c);
         if(dp[r][c] != -1) return dp[r][c];
 
-        int up = helper(r-1, c-1, dp, mat);
-        int left = helper(r-1, c, dp, mat); 
+        int up = helper(r+1, c+1, dp, mat);
+        int left = helper(r+1, c, dp, mat); 
         dp[r][c] = mat.get(r).get(c) + Math.min(up, left);
 
         return dp[r][c];
